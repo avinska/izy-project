@@ -12,7 +12,7 @@ import {SliderBox} from 'react-native-image-slider-box';
 import FloatingButton from '../components/FloatingButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
   const images = [
     require('../assets/banner-2.jpg'),
     require('../assets/banner-1.jpg'),
@@ -112,6 +112,7 @@ export default function HomeScreen() {
           Features
         </Text>
         <TouchableOpacity
+          onPress={() => navigation.navigate('FormList')}
           style={{
             borderColor: '#EFEFEF',
             borderWidth: 1,

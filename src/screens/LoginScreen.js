@@ -51,7 +51,11 @@ export default function LoginScreen({navigation}) {
           <Text style={styles.forgot}>Forgot Password</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.loginButton} onPress={() => {}}>
+      <TouchableOpacity
+        style={styles.loginButton}
+        onPress={() => {
+          navigation.navigate('HomeTab');
+        }}>
         <Text style={{color: '#212529', fontWeight: '500'}}>LOG IN</Text>
       </TouchableOpacity>
     </Background>

@@ -6,7 +6,7 @@
  * @format
  */
 
-import React, {useEffect} from 'react';
+import React, {useEffect, createContext, useContext, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -16,14 +16,40 @@ import {
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import 'react-native-gesture-handler';
 
 import SplashScreen from 'react-native-splash-screen';
-import LoginScreen from './src/screens/LoginScreen';
-import HomeScreen from './src/screens/HomeScreen';
 import TabNavigator from './src/navigators/TabNavigator';
+import StackNavigator from './src/navigators/StackNavigator';
+
+export const ComplaintsContext = createContext(null);
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
+  const [complaints, setComplaints] = useState([
+    {
+      id: 1,
+      tenantName: 'Paradise Coffee',
+      status: 'Waiting',
+      type: 'Complaint',
+      code: 'L1 #03',
+      description:
+        'All lights are off & can’t be turned on although MCB looks fine',
+      category: 'Electricity',
+      assignee: null,
+    },
+    {
+      id: 2,
+      tenantName: 'Paradise Coffee',
+      status: 'Processed',
+      type: 'Complaint',
+      code: 'L1 #03',
+      description:
+        'Lorem ipsum dolor sit amet, consectet adipiscing elit. Phasellus velit lacu …',
+      category: 'Electricity',
+      assignee: 'B',
+    },
+  ]);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : '#fff',
@@ -34,19 +60,25 @@ function App() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <TabNavigator>
-        <SafeAreaView style={backgroundStyle}>
-          <StatusBar
-            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-            backgroundColor={backgroundStyle.backgroundColor}
-          />
-          <ScrollView
+    <ComplaintsContext.Provider
+      value={{
+        complaints,
+        setComplaints,
+      }}>
+      <NavigationContainer>
+        <StackNavigator>
+          <SafeAreaView style={backgroundStyle}>
+            <StatusBar
+              barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+              backgroundColor={backgroundStyle.backgroundColor}
+            />
+            {/* <ScrollView
             contentInsetAdjustmentBehavior="automatic"
-            style={backgroundStyle}></ScrollView>
-        </SafeAreaView>
-      </TabNavigator>
-    </NavigationContainer>
+            style={backgroundStyle}></ScrollView> */}
+          </SafeAreaView>
+        </StackNavigator>
+      </NavigationContainer>
+    </ComplaintsContext.Provider>
   );
 }
 

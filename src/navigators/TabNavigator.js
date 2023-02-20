@@ -3,7 +3,7 @@ import {Image, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import MeongScreen from '../screens/MeongScreen';
+import HomeScreen from '../screens/HomeScreen';
 import DummyContent from '../components/DummyContent';
 
 const Tab = createBottomTabNavigator();
@@ -62,7 +62,7 @@ export default function TabNavigator() {
         tabBarInactiveBackgroundColor: '#fff',
         tabBarShowLabel: false,
       })}>
-      <Tab.Screen name="Home" component={MeongScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Chat" component={DummyContent} />
       <Tab.Screen name="Others" component={DummyContent} />
     </Tab.Navigator>
